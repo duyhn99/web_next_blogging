@@ -4,7 +4,7 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 export default function Footer() {
   return (
     <footer className='mt-12 border-t py-8'>
-      <div className='container'>
+      <div className='container mx-auto'>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
           <div className='space-y-4'>
             <Link href='/' className='text-xl font-bold text-green-500'>

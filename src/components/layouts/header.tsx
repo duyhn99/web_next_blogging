@@ -31,26 +31,26 @@ export default function Header() {
 
   return (
     <header className='bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur'>
-      <div className='container flex h-16 items-center justify-between'>
-        <div className='flex items-center gap-8'>
+      <div className='container mx-auto flex h-16 items-center justify-between'>
+        <div className='flex items-center justify-between gap-8'>
           <Link href='/' className='text-xl font-bold text-green-500'>
             Choncc
           </Link>
-          <nav className='hidden gap-6 md:flex'>
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'hover:text-primary text-sm font-medium transition-colors',
-                  pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
         </div>
+        <nav className='hidden gap-6 md:flex'>
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                'hover:text-primary text-sm font-medium transition-colors',
+                pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
         <div className='flex items-center gap-2'>
           <Button variant='ghost' size='icon' className='text-muted-foreground'>
             <Search className='h-5 w-5' />
