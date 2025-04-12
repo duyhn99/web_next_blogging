@@ -1,26 +1,23 @@
 'use client';
 
+import { signOut } from '@/actions/auth-actions';
+import { ThemeSwitcher } from '@/components/theme-switcher';
+import { Button } from '@/components/ui/button';
+import { ROUTES } from '@/configs/route.config';
+import { cn } from '@/lib/utils';
+import { User } from '@supabase/supabase-js';
+import { LogOut, Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
-import { useSupabase } from '@/contexts/supabase-provider';
-import { ThemeSwitcher } from '@/components/theme-switcher';
 
-export default function Header() {
+export default function Header({ user }: { user: User | null }) {
   const pathname = usePathname();
-  const { supabase, user } = useSupabase();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(false);
   }, []);
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-  };
 
   const navItems = [
     { name: 'Trang chủ', href: '/' },
@@ -43,8 +40,10 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                'hover:text-primary text-sm font-medium transition-colors',
-                pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+                'text-nav rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-green-500 hover:text-white',
+                {
+                  'bg-green-500 text-white': pathname === item.href
+                }
               )}
             >
               {item.name}
@@ -61,16 +60,18 @@ export default function Header() {
               {user ? (
                 <div className='flex items-center gap-2'>
                   <Link href='/dashboard'>
-                    <Button variant='ghost' size='sm'>
-                      Dashboard
-                    </Button>
+                    <span className='rounded-md border bg-green-800 px-4 py-2 text-sm font-medium hover:bg-green-600'>
+                      {user.user_metadata?.name || user.email?.split('@')[0] || 'User'}
+                    </span>
                   </Link>
-                  <Button variant='ghost' size='sm' onClick={handleSignOut}>
-                    Đăng xuất
-                  </Button>
+                  <form action={signOut}>
+                    <Button variant='ghost' size='sm' type='submit' title='Đăng xuất'>
+                      <LogOut color='red' />
+                    </Button>
+                  </form>
                 </div>
               ) : (
-                <Link href='/login'>
+                <Link href={ROUTES.LOGIN}>
                   <Button className='bg-green-500 text-white hover:bg-green-600'>Đăng nhập</Button>
                 </Link>
               )}
