@@ -7,7 +7,6 @@ import type { ThemeProviderProps } from 'next-themes';
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const [mounted, setMounted] = React.useState(false);
 
-  // Đảm bảo component chỉ render ở client side để tránh hydration mismatch
   React.useEffect(() => {
     setMounted(true);
   }, []);

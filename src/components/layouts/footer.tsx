@@ -3,7 +3,7 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 
 export default function Footer() {
   return (
-    <footer className='mt-12 border-t py-8'>
+    <footer className='bg-footer-bg mt-12 border-t py-8'>
       <div className='container mx-auto'>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
           <div className='space-y-4'>
@@ -87,13 +87,9 @@ export default function Footer() {
             <h3 className='mb-4 font-medium'>Liên hệ</h3>
             <address className='text-muted-foreground not-italic'>
               <p>Email: contact@Choncc.io</p>
-              <p>Địa chỉ: Hà Nội, Việt Nam</p>
+              <p>Địa chỉ: Cần Thơ, Việt Nam</p>
             </address>
           </div>
-        </div>
-
-        <div className='text-muted-foreground mt-8 border-t pt-8 text-center text-sm'>
-          <p>&copy; {new Date().getFullYear()} Choncc. Tất cả các quyền được bảo lưu.</p>
         </div>
       </div>
     </footer>
