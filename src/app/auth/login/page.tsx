@@ -128,7 +128,7 @@ export default function LoginPage() {
                 </Button>
                 <div className='text-center text-sm'>
                   <span className='text-muted-foreground'>Bạn chưa có tài khoản? </span>
-                  <Link href='/register' className='text-green-500 hover:text-green-400'>
+                  <Link href={ROUTES.REGISTER} className='text-green-500 hover:text-green-400'>
                     Đăng ký
                   </Link>
                 </div>
