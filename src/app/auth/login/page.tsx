@@ -8,6 +8,7 @@ import { InputPassword } from '@/components/ui/input-password';
 import { ROUTES } from '@/configs/route.config';
 import useToast from '@/hooks/use-toast';
 import { supabaseClient } from '@/lib/supabase/client';
+import { useAuthStore } from '@/stores/authStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -38,12 +39,13 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  const { setUser } = useAuthStore();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true);
       const supabase = supabaseClient();
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error, data } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password
       });
@@ -54,6 +56,7 @@ export default function LoginPage() {
           description: error.message
         });
       } else {
+        setUser(data.user);
         router.push(ROUTES.HOME);
       }
     } catch (error: any) {

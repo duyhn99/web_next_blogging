@@ -1,5 +1,5 @@
-import AuthHeader from '@/components/auth/AuthHeader';
 import Footer from '@/components/layouts/footer';
+import Header from '@/components/layouts/header';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/contexts/theme-provider';
 import type { Metadata } from 'next';
@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={`${interSans.variable} antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <div className='flex min-h-screen flex-col'>
-            <AuthHeader />
+            <Header />
             <main className='flex-1'>{children}</main>
             <Footer />
             <Toaster richColors closeButton position='top-right' />

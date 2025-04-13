@@ -78,6 +78,7 @@ export default async function Home() {
                 src={featuredPost.featured_image || noPicture}
                 alt={featuredPost.title}
                 fill
+                priority
                 className='object-cover'
               />
             </div>

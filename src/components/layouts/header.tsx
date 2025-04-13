@@ -1,19 +1,19 @@
 'use client';
 
-import { signOut } from '@/actions/auth-actions';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/configs/route.config';
 import { cn } from '@/lib/utils';
-import { User } from '@supabase/supabase-js';
+import { useAuthStore } from '@/stores/authStore';
 import { LogOut, Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function Header({ user }: { user: User | null }) {
+export default function Header() {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
+  const { user, signOut } = useAuthStore();
 
   useEffect(() => {
     setIsLoading(false);
@@ -61,7 +61,7 @@ export default function Header({ user }: { user: User | null }) {
                 <div className='flex items-center gap-2'>
                   <Link href='/dashboard'>
                     <span className='rounded-md border bg-green-800 px-4 py-2 text-sm font-medium hover:bg-green-600'>
-                      {user.user_metadata?.name || user.email?.split('@')[0] || 'User'}
+                      {user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'}
                     </span>
                   </Link>
                   <form action={signOut}>
