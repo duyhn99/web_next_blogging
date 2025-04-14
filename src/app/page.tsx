@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { supabaseServer } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import noPicture from '@/assets/images/no-pictures.png';
 import { ROUTES } from '@/configs/route.config';
 
 async function getFeaturedPost() {
-  const supabase = await supabaseServer();
+  const supabase = await createClient();
 
   const { data } = await supabase
     .from('posts')
@@ -33,7 +33,7 @@ async function getFeaturedPost() {
 }
 
 async function getRecentPosts() {
-  const supabase = await supabaseServer();
+  const supabase = await createClient();
 
   const { data } = await supabase
     .from('posts')

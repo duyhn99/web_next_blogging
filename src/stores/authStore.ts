@@ -1,4 +1,4 @@
-import { supabaseClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { User } from '@supabase/supabase-js';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
@@ -19,7 +19,7 @@ export const useAuthStore = create<AuthState>()(
       setUser: (user) => set({ user }),
       fetchUser: async () => {
         set({ isLoading: true });
-        const supabase = supabaseClient();
+        const supabase = createClient();
         const { data, error } = await supabase.auth.getUser();
         if (error || !data.user) {
           set({ user: null, isLoading: false });
@@ -31,7 +31,7 @@ export const useAuthStore = create<AuthState>()(
         });
       },
       signOut: async () => {
-        const supabase = supabaseClient();
+        const supabase = createClient();
         await supabase.auth.signOut();
         set({ user: null });
       }
