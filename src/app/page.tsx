@@ -6,7 +6,7 @@ import Link from 'next/link';
 import noPicture from '@/assets/images/no-pictures.png';
 import { ROUTES } from '@/configs/route.config';
 
-async function getFeaturedPost() {
+export async function getFeaturedPost() {
   const supabase = await createClient();
 
   const { data } = await supabase
@@ -32,7 +32,7 @@ async function getFeaturedPost() {
   return data;
 }
 
-async function getRecentPosts() {
+export async function getRecentPosts() {
   const supabase = await createClient();
 
   const { data } = await supabase

@@ -25,12 +25,10 @@ export default function RootLayout({
     <html lang='vi' suppressHydrationWarning>
       <body className={`${interSans.variable} antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <div className='flex min-h-screen flex-col'>
-            <Header />
-            <main className='flex-1'>{children}</main>
-            <Footer />
-            <Toaster richColors closeButton position='top-right' />
-          </div>
+          <Header />
+          <main className='min-h-[100dvh]'>{children}</main>
+          <Footer />
+          <Toaster richColors closeButton position='top-right' />
         </ThemeProvider>
       </body>
     </html>
